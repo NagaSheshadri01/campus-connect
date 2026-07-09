@@ -32,10 +32,15 @@ export default function LoginPage() {
       const { error } = await signUp(email, password, fullName, targetRole as "Student" | "Admin" | "Technician");
       setLoading(false);
       if (error) {
-        setError(error);
+        if (error.toLowerCase().includes("already registered") || error.toLowerCase().includes("already exists") || error.toLowerCase().includes("taken")) {
+          setError("This email address is already registered. Please try signing in instead.");
+        } else {
+          setError(error);
+        }
       } else {
-        setSuccess("Account created! Check your email to confirm, then sign in.");
-        setIsSignUp(false);
+        // Redirect directly to the appropriate dashboard
+        const dest = targetRole === "Admin" ? "/admin" : targetRole === "Technician" ? "/technician" : "/student";
+        navigate(dest, { replace: true });
       }
     } else {
       const { error } = await signIn(email, password);
