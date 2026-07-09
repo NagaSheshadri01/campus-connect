@@ -8,8 +8,6 @@ import { useAuth } from "@/lib/auth";
 const navLinks = [
   { path: "/", label: "Home" },
   { path: "/student", label: "Student Portal" },
-  { path: "/admin", label: "Admin", requiresRole: "Admin" as const },
-  { path: "/technician", label: "Technician", requiresRole: "Technician" as const },
 ];
 
 export function Navbar() {

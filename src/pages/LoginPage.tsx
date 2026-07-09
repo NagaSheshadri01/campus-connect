@@ -29,7 +29,7 @@ export default function LoginPage() {
     setLoading(true);
 
     if (isSignUp) {
-      const { error } = await signUp(email, password, fullName, targetRole as "Admin" | "Technician");
+      const { error } = await signUp(email, password, fullName, targetRole as "Student" | "Admin" | "Technician");
       setLoading(false);
       if (error) {
         setError(error);

@@ -22,7 +22,7 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
     return <Navigate to={`/login?role=${requiredRole}`} state={{ from: location.pathname }} replace />;
   }
 
-  if (profile && profile.role !== requiredRole) {
+  if (!profile || profile.role !== requiredRole) {
     return <Navigate to="/" replace />;
   }
 
