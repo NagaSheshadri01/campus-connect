@@ -32,10 +32,11 @@ export default function LoginPage() {
       const { error } = await signUp(email, password, fullName, targetRole as "Student" | "Admin" | "Technician");
       setLoading(false);
       if (error) {
+        console.error("Supabase Signup Error:", error);
         if (error.toLowerCase().includes("already registered") || error.toLowerCase().includes("already exists") || error.toLowerCase().includes("taken")) {
-          setError("This email address is already registered. Please try signing in instead.");
+          setError(`This email address is already registered. (Raw details: ${error})`);
         } else {
-          setError(error);
+          setError(`Signup failed: ${error}`);
         }
       } else {
         // Redirect directly to the appropriate dashboard
